@@ -1,5 +1,5 @@
 // INITIAL REQUIRE STATEMENTS AND VARIABLES
-const Sequelize = require('sequelize');
+const Sequelize = require('./models').sequelize;
 const express = require('express');
 const path = require('path');
 const Book = require('./models').Book;
@@ -76,7 +76,7 @@ app.get('/books/search', (req, res, next) => {
       });
     })
     .catch(err => {                                // Catch error if no match
-      const error = new Error('Server Error');
+      const error = new Error('Internal Server Error!');
       error.status = 500;
       next(error);
     })
@@ -105,24 +105,97 @@ app.post('/books/new', (req, res, next) => {
       }
     })
     .catch(err => {
-      const error = new Error('Server Error');
+      const error = new Error('Internal Server Error!');
       error.status = 500;
       next(error);
     })
 });
 
+// SHOWS NEW DETAILS WHEN BOOK UPDATED
+app.get('/books/:id', (req, res, next) => {
+  Book.findByPk(req.params.id)
+    .then(book => {
+      res.render('update-book', {book: book, title: book.title});
+    })
+    .catch(err => {
+      const error = new Error('Internal Server Error!');
+      error.status = 500;
+     // next(error);
+    })
+});
+
+// UPDATE BOOK INFO ENTERED
+app.post('/books/:id', (req, res, next) => {
+  Book.findByPk(req.params.id)
+    .then(book => book.update(req.body))
+    .then(book => res.redirect('/'))
+    .catch(err => {
+      if(err.name === 'SequelizeValidationError') {
+        let book = Book.build(req.body);
+        book.id = req.params.id;
+        res.render('update-book', {
+          book: book,
+          title: book.title,
+          errors: err.errors
+        });
+      } else {
+        throw err;
+      }
+    })
+    .catch(err => {
+      const error = new Error('Internal Server Error!');
+      error.status = 500;
+      next(error);
+    })
+});
+
+// DELETES BOOK
+app.post('/books/:id/delete', (req, res, next) => {
+  Book.findByPk(req.params.id)
+    .then(book => book.destroy())
+    .then(book => res.redirect('/'))
+    .catch(err => {
+      const error = new Error('Internal Server Error!');
+      error.status = 500;
+      next(error);
+    })
+});
+
+// IGNORE FAVICON.ICO
+app.get('/favicon.ico', (req, res) => res.status(204));
+
+// RENDER PAGE NOT FOUND
+app.use((req, res) => {
+  const error = new Error('Page Not Found!');
+  error.status = 404;
+  res.render('page-not-found', {error});
+});
+
+// ERROR ROUTE
+app.use((err, req, res, next) => {
+  res.render('error', {error: err});
+  console.log(`There was an error with the application: ${err}`);
+});
+
+//LISTENING ON PORT
+Sequelize.sync().then(() => {
+  app.listen(port, () => {
+    console.log(`application is listening on port ${portNum}`);
+  });
+});
 
 
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: 'library.db'});
 
-// async IIFE
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection to the database successful!');
-  } catch (error) {
-    console.error('Error connecting to the database: ', error);
-  }
-})();
+// const sequelize = new Sequelize({
+//     dialect: 'sqlite',
+//     storage: 'library.db'});
+
+// // async IIFE
+// (async () => {
+//   try {
+//     await sequelize.authenticate();
+//     console.log('Connection to the database successful!');
+//   } catch (error) {
+//     console.error('Error connecting to the database: ', error);
+//   }
+// })();
