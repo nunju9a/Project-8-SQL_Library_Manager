@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       year: DataTypes.INTEGER                         // Year property: DataType is an integer
     }, {});
     Book.associate = function(models) {
-                                                // Associations can be defined here 
+                                                   // Associations can be defined here 
     };
     return Book;
   };
