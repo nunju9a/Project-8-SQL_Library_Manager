@@ -1,35 +1,21 @@
 extends layout.pug
 
 block content
-  h1 Books
-  form(method='get' action='/books/search')
-    P
-      input(name='search' type='search' id='search')
-      input(class='search-button' type='submit', value='Search')
-  unless inSearch
-    p
-      a(class='button', href='/books/new') Create New Book
-  else
-    p
-      a(class='button', href='/') Return To Full List
-  table
-    thead
-      tr
-        th Title
-        th Author
-        th Genre
-        th Year
-    tbody
-      each book in books
-        tr
-          td
-            a(href=`/books/${book.id}`)= book.title
-          td= book.author
-          td= book.genre
-          td= book.year
-  if pages
-    ul
-      - var i = 1;
-      while i < (pages + 1)
-        li
-          a(class='button', href=`/books/pages/${i}`)= i++
+      h1 Books
+      p
+        a.button(href='/books/new') Create New Book
+      table
+            thead
+               tr
+               th Title
+               th Author
+               th Genre
+               th Year
+            tbody
+               each book in books
+                 tr
+                 td
+                  a(href = "/books/" + book.id)= book.title
+                 td= book.author
+                 td= book.genre
+                 td= book.year
