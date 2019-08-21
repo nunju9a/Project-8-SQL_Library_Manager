@@ -1,9 +1,9 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
-  var Book = sequelize.define(
+  const Book = sequelize.define(                                          //Defining book model
     "Book",
     {
-      title: {
+      title: {                                                         // Title property 
         type: DataTypes.STRING,
         validate: {
           notEmpty: {
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      author: {
+      author: {                                                 // Author property
         type: DataTypes.STRING,
         validate: {
           notEmpty: {
@@ -19,8 +19,8 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      genre: DataTypes.STRING,
-      year: DataTypes.INTEGER
+      genre: DataTypes.STRING,                           // Genre property
+      year: DataTypes.INTEGER                           // Year property
     },
     {
       classMethods: {
