@@ -4,7 +4,7 @@ block content
     h1= title
 
     if(errors)
-         h2.error Ooops, an error occurred!
+         h2.error An error has occurred! It's not you, it's us!
          ul.error
            each error in errors
             li
@@ -30,3 +30,5 @@ block content
         a.button(href='/books') Cancel
       p
         input(type='submit', value='Delete Book')
+      p
+        a.button(href='/books') Home
