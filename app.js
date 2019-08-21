@@ -41,4 +41,5 @@ sequelize.sync().then(() => {
   app.listen(3000, () => console.log("Successfully running on localhost:3000!"));
 });
 
+
 module.exports = app;

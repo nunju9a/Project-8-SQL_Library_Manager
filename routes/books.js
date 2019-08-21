@@ -110,4 +110,27 @@ router.post("/:id/delete", (req, res, next) => {
     });
 });
 
+router.get('/search', (req, res) => {
+  const { term } = req.query;
+
+  Books.findAll({where: {[Op.or]: [
+      {
+          title: {[Op.like] : '%' + term + '%'}
+      },
+      {
+          author: {[Op.like] : '%' + term + '%'}
+      },
+      {
+          genre: {[Op.like] : '%' + term + '%'}
+      },
+      {
+          year: {[Op.like] : '%' + term + '%'}
+      }
+  ]}})
+      .then(books => {
+          res.render('search', {books, term});
+      })
+      .catch(err => console.log(err));
+});
+
 module.exports = router;

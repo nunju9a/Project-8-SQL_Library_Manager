@@ -1,0 +1,29 @@
+extends layout
+
+block content
+    div.results
+        p.back
+            a.button(href='/books/') Home
+        h3.search-results Search Results for "#{term}" :
+        if(books.length > 0)
+            table
+                tr
+                    th Title
+                    th Author
+                    th Genre
+                    th Year
+                each book in books
+                    tr.bookRow
+                        td
+                            a(href="/books/" + book.id)= book.title
+                        td
+                            a= book.author
+                        td
+                            a= book.genre
+                        td
+                            a= book.year
+            div.links
+            script(src='/static/js/app.js')
+        else
+            h3.no-results
+                em No results found
