@@ -1,7 +1,7 @@
 const express = require("express");
-const router = express.Router();
-const Book = require("../models").Book;
 const Sequelize = require("sequelize");
+const Book = require("../models").Book;
+const router = express.Router();
 const Op = Sequelize.Op;
 
 router.get("/", function(req, res, next) {
@@ -17,8 +17,8 @@ router.get("/", function(req, res, next) {
 router.get("/new", function(req, res, next) {
   res.render("newbook", { book: {}, title: "New Book" });
 });
-//Send a POST request to / to  CREATE a new book
 
+// POST REQUEST FOR NEW BOOK
 router.post("/new", function(req, res, next) {
   Book.create(req.body)
     .then(function(book) {
@@ -59,7 +59,7 @@ router.get("/:id", function(req, res, next) {
       next({ status: 500, message: err.message });
     });
 });
-
+// POST REQUEST TO UPDATE BOOK
 router.post("/:id", function(req, res, next) {
   Book.findByPk(req.params.id)
     .then(function(book) {
