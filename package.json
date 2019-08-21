@@ -1,20 +1,19 @@
 {
-  "name": "Project-8",
+  "name": "sql-library",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "description": "A library manager database",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "express-validator": "^6.1.1",
-    "pug": "^2.0.4",
-    "sequelize": "^5.15.1",
-    "sequelize-cli": "^5.5.0",
-    "sqlite3": "^4.1.0"
+    "mysql2": "^1.6.5",
+    "path": "^0.12.7",
+    "pug": "^2.0.3",
+    "sequelize": "^5.8.7",
+    "sequelize-cli": "^5.4.0",
+    "sqlite3": "^4.0.8"
   }
 }
