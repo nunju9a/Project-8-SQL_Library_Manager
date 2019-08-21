@@ -4,6 +4,11 @@ block content
       h1 Books
       p
         a.button(href='/books/new') Create New Book
+      div
+         form.search(method='GET' action='')
+           div.form-group
+             input.button(type='text', placeholder='Enter Search Here...' name='search' value=undefined)
+           button.button(type='submit') Search  
       table
             thead
                tr
@@ -19,3 +24,7 @@ block content
                  td= book.author
                  td= book.genre
                  td= book.year
+            if pages
+            div.pagination  
+              - for (var i = 0; i < pages; ++i) 
+                a.button(href="/books/?page=" + (i+1)) #{i + 1}
