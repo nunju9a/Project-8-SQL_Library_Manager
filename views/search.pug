@@ -3,8 +3,8 @@ extends layout
 block content
     div.results
         p.back
-            a.button(href='/books/') Home
-        h3.search-results Search Results for "#{term}" :
+            a.button(href='/books') Home
+        h3.search-results Search Results for "#{searchKeyWord}" :
         if(books.length > 0)
             table
                 tr
@@ -15,7 +15,7 @@ block content
                 each book in books
                     tr.bookRow
                         td
-                            a(href="/books/" + book.id)= book.title
+                            a(href=`/books/" ${book.id}`)= book.title
                         td
                             a= book.author
                         td

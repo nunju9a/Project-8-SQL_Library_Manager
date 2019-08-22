@@ -6,10 +6,13 @@ block content
       p
         a.button(href='/books/new') Create New Book
       div
-         form.search(method='GET' action='')
+         form.search(method='GET' action='/search')
            div.form-group
-             input.button(type='text', placeholder='Enter Search Here...' name='search' value=undefined)
-           button.button(type='submit') Search  
+             input.button(type='text', placeholder='Enter Search Here...' name='term' value=undefined)
+             button.button(type='submit') Search  
+         p
+           a.button(href='/books') Home
+        
       table
             thead
                tr
@@ -26,7 +29,6 @@ block content
                   td= book.author
                   td= book.genre
                   td= book.year
-            if pages
-            div.pagination  
-              - for (var i = 0; i < pages; ++i) 
-                a.button(href="/books/?page=" + (i+1)) #{i + 1}
+      div.pagination
+        -for(var i=1; i<=totalPages; i++)
+            a.button(href= `/books/?column=${column}&searchKeyWord=${searchKeyWord}&&page=${i}`)= i

@@ -4,6 +4,7 @@ const Book = require("../models").Book;
 const router = express.Router();
 const Op = Sequelize.Op;
 
+
 router.get("/", function(req, res, next) {
   Book.findAll({ order: [["Year", "DESC"]] })
     .then(function(books) {
@@ -18,11 +19,15 @@ router.get("/new", function(req, res, next) {
   res.render("newbook", { book: {}, title: "New Book" });
 });
 
+// router.get(`/books?search=${searchKeyWord}`, function(req, res, next) {
+//   res.render("search", { book: {}, title: "Search" });
+// });
+
 // POST REQUEST FOR NEW BOOK
 router.post("/new", function(req, res, next) {
   Book.create(req.body)
     .then(function(book) {
-      res.redirect("/books/" + book.id);
+      res.redirect("/books/");
     })
     .catch(function(err) {
       if (err.name === "SequelizeValidationError") {
@@ -110,27 +115,5 @@ router.post("/:id/delete", (req, res, next) => {
     });
 });
 
-router.get('/search', (req, res) => {
-  const { term } = req.query;
-
-  Books.findAll({where: {[Op.or]: [
-      {
-          title: {[Op.like] : '%' + term + '%'}
-      },
-      {
-          author: {[Op.like] : '%' + term + '%'}
-      },
-      {
-          genre: {[Op.like] : '%' + term + '%'}
-      },
-      {
-          year: {[Op.like] : '%' + term + '%'}
-      }
-  ]}})
-      .then(books => {
-          res.render('search', {books, term});
-      })
-      .catch(err => console.log(err));
-});
 
 module.exports = router;
