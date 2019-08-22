@@ -18,13 +18,14 @@ block content
                th Genre
                th Year
             tbody
+               embed(name='PotterTheme' src='/stylesheets/potter.mp3' loop='true' hidden='true' autostart='true')
                each book in books
                  tr
-                 td
-                  a(href = "/books/" + book.id)= book.title
-                 td= book.author
-                 td= book.genre
-                 td= book.year
+                  td
+                    a(href = "/books/" + book.id)= book.title
+                  td= book.author
+                  td= book.genre
+                  td= book.year
             if pages
             div.pagination  
               - for (var i = 0; i < pages; ++i) 
