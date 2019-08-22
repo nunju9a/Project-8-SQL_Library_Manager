@@ -1,22 +1,50 @@
 body {
   padding: 10px 50px 50px;
   font: 18px "Garamond", serif;
+  background-image: url(./library.jpg);
+  background-size: cover;
+}
+
+h1 {
+  color:red;
+}
+
+button.button{
+  color: white;
+  background:black;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px 14px 12px;
+  font-size: 14px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+button.button:hover {
+  background-color:black;
+  transform: scale(1.10);
 }
 
 a {
-  color: #019875;
+  color:black;
   text-decoration: none;
   font-weight: bold;
   transition: 0.4s;
+  background:gray;
+    border-radius: 0.25em;
+    border: 4px solid rgba(130, 50, 133, 0.603);
+    transition: .4s ease-out;
 }
 
   a:hover {
-    color: black;
+    color:red;
+    transform: rotate(45deg);
+    background: gold;
+    border: 2px solid rgba(0, 0, 0, 0.603);
   }
 
 a.button, input[type=submit] {
   color: white;
-  background: #019875;
+  background:black;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
   font-size: 14px;
@@ -25,18 +53,29 @@ a.button, input[type=submit] {
 }
 
 form a.button, input[type=submit] {
-  margin-left: 140px;
-  transition: 0.4s;
+  color: white;
+  background:black;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px 14px 12px;
+  font-size: 14px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 input[type=submit] {
   border: 0;
+  background: black;
 }
 
   a.button:hover, input[type=submit]:hover {
-    background-color: #01b189;
+    background-color:black;
+    transform: scale(1.10);
   }
 
+  a.button:hover{
+    background-color:black;
+    transform: scale(1.10);
+  }
 p {
   margin: 20px auto;
 }
