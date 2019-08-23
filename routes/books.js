@@ -4,7 +4,7 @@ const Book = require("../models").Book;
 const router = express.Router();
 const Op = Sequelize.Op;
 
-
+// RENDER INDEX PAGE WITH TABLE OF BOOKS
 router.get("/", function(req, res, next) {
   Book.findAll({ order: [["Year", "DESC"]] })
     .then(function(books) {
@@ -15,13 +15,11 @@ router.get("/", function(req, res, next) {
     });
 });
 
+// RENDER NEWBOOK ROUTE
 router.get("/new", function(req, res, next) {
   res.render("newbook", { book: {}, title: "New Book" });
 });
 
-// router.get(`/books?search=${searchKeyWord}`, function(req, res, next) {
-//   res.render("search", { book: {}, title: "Search" });
-// });
 
 // POST REQUEST FOR NEW BOOK
 router.post("/new", function(req, res, next) {
@@ -44,7 +42,7 @@ router.post("/new", function(req, res, next) {
       next({ status: 500, message: err.message });
     });
 });
-
+// GETTING BOOK ID PARAMS
 router.get("/:id", function(req, res, next) {
   Book.findByPk(req.params.id)
     .then(function(book) {
@@ -97,7 +95,7 @@ router.post("/:id", function(req, res, next) {
       next({ status: 500, message: err.message });
     });
 });
-
+// POST REQUEST TO DELETE BOOK
 router.post("/:id/delete", (req, res, next) => {
   Book.findByPk(req.params.id)
     .then(function(book) {
