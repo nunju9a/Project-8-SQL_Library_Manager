@@ -29,6 +29,7 @@ block content
                   td= book.author
                   td= book.genre
                   td= book.year
-      div.pagination
-        -for(var i=1; i<=totalPages; i++)
-            a.button(href= `/books/?column=${column}&searchKeyWord=${searchKeyWord}&&page=${i}`)= i
+      
+      div.pagination  
+          -for(var i=1; i<=totalPages; i++)
+               a.button(href= `/books/?column=${column}&searchKeyWord=${searchKeyWord}&&page=${i}`)= i
